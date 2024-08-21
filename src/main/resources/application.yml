@@ -1,0 +1,10 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: fibonaccier
+
+logging:
+  level:
+    ro.smartbill.fibonaccier: debug

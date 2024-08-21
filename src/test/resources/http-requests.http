@@ -1,0 +1,36 @@
+
+### GENERATE with null param
+POST http://localhost:8000/fibo/next
+
+### GENERATE with empty param
+POST http://localhost:8000/fibo/next?user
+
+#### GENERATE for USER1
+POST http://localhost:8000/fibo/next?user=USER1
+
+#### GENERATE for USER2
+POST http://localhost:8000/fibo/next?user=USER2
+
+### BACK with null param
+POST http://localhost:8000/fibo/back
+
+### BACK with empty param
+POST http://localhost:8000/fibo/back?user
+
+#### BACK for USER1
+POST http://localhost:8000/fibo/back?user=USER1
+
+#### BACK for USER2
+POST http://localhost:8000/fibo/back?user=USER2
+
+### LIST with null param
+GET http://localhost:8000/fibo/list
+
+### LIST with empty param
+GET http://localhost:8000/fibo/list?user
+
+#### LIST for USER1
+GET http://localhost:8000/fibo/list?user=USER1
+
+#### LIST for USER2
+GET http://localhost:8000/fibo/list?user=USER2
