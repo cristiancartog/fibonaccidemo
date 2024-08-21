@@ -20,22 +20,24 @@ public class FibonacciComputerService {
             throw new UserNotFoundException(user);
         }
 
+        int result;
         UserContext userContext = userContextRepository.getUserContext(user);
 
-        var index = userContext.getIndex();
-        List<Integer> values = userContext.values();
-        var size = values.size();
+        synchronized (userContext) {
+            var index = userContext.getIndex();
+            List<Integer> values = userContext.values();
+            var size = values.size();
 
-        int result;
-        if (index < size) {
-            result = values.get(index);
-        } else {
-            var nextFiboValue = nextFibonacciValue(values);
-            userContext.addValue(nextFiboValue);
-            result = nextFiboValue;
+            if (index < size) {
+                result = values.get(index);
+            } else {
+                var nextFiboValue = nextFibonacciValue(values);
+                userContext.addValue(nextFiboValue);
+                result = nextFiboValue;
+            }
+
+            userContext.incrementIndex();
         }
-
-        userContext.incrementIndex();
 
         return result;
     }
@@ -56,7 +58,9 @@ public class FibonacciComputerService {
             throw new UserNotFoundException(user);
         }
 
-        userContext.decrementIndex();
+        synchronized (userContext) {
+            userContext.decrementIndex();
+        }
     }
 
     public List<Integer> values(final String user) throws UserNotFoundException {

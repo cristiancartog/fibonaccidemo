@@ -13,13 +13,13 @@ import java.util.Map;
 @Service
 public class UserContextRepository {
 
-    private Map<String, UserContext> cache = new HashMap<>();
+    private final Map<String, UserContext> cache = new HashMap<>();
 
-    public UserContext getUserContext(final String user) {
+    public synchronized UserContext getUserContext(final String user) {
         return cache.computeIfAbsent(user, k -> new UserContext());
     }
 
-    public UserContext findUserContext(final String user) {
+    public synchronized UserContext findUserContext(final String user) {
         return cache.get(user);
     }
 
